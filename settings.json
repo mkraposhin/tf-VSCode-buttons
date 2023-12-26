@@ -1,0 +1,37 @@
+{
+    "remote.WSL.debug": true,
+    "workbench.startupEditor": "none",
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+    
+    "remote.SSH.path": "C:\\Users\\ezizganova\\bin\\ssh.bat",
+    "settingsSync.ignoredSettings": [
+        
+    ],
+    "remote.SSH.remotePlatform": {
+        "172.16.0.47": "linux"
+    },
+    "dev.containers.executeInWSL": true,
+    "actionButtons": {
+   	 "defaultColor": "#ff0034", // Can also use string color names.
+   	 "loadNpmCommands":false, // Disables automatic generation of actions for npm commands.
+   	 "reloadButton":"♻️", // Custom reload button text or icon (default ↻). null value enables automatic reload on configuration change
+   	 "commands": [
+		{
+			"cwd": "/home/ezizganova/work/tungsten/contrail", 	// Terminal initial folder ${workspaceFolder} and os user home as defaults
+   			"name": "$(tools) Build VRouterAgent",
+			"color": "green",
+			"command": "./BVA.sh",
+		},
+   		{
+   			"cwd": "/home/ezizganova", 	// Terminal initial folder ${workspaceFolder} and os user home as defaults
+   			"name": "$(triangle-right) Run GDB-Server",
+   			"color": "red",
+   			"singleInstance": true,
+   			"command":"./Run_GDB_server.sh", // This is executed in the terminal.
+ 		}
+   		
+   	 ]
+	}
+}
