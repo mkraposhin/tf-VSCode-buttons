@@ -10,17 +10,17 @@
     "git.ignoreLegacyWarning": true,
     // OpenSDN build settings
     "terminal.integrated.env.linux": {
-        "OPENSDN_PROJECT_DIR" : "172.16.0.4-tf-krap-build",
-        "OPENSDN_BUILD_HOST" : "172.16.0.4",
+        "OPENSDN_PROJECT_DIR"      : "172.16.0.4-tf-krap-build",
+        "OPENSDN_BUILD_HOST"       : "172.16.0.4",
         "OPENSDN_REMOTE_BUILD_DIR" : "tf-krap-build",
-        "OPENSDN_TARGET_TYPE" : "debug",
-        "OPENSDN_N_BUILD_CPU" : "16",
-        "OPENSDN_TARGET_DIR" : "vnsw/agent/contrail",
-        "OPENSDN_TARGET_BIN" : "contrail-vrouter-agent",
+        "OPENSDN_TARGET_TYPE"      : "debug",
+        "OPENSDN_N_BUILD_CPU"      : "16",
+        "OPENSDN_TARGET_DIR"       : "vnsw/agent/contrail",
+        "OPENSDN_TARGET_BIN"       : "contrail-vrouter-agent",
         "OPENSDN_TARGET_CONTAINER" : "vrouter_vrouter-agent_1",
-        "OPENSDN_TARGET_HOSTS" : "172.16.0.28",
-        "OPENSDN_GDBSERVER_HOST" : "172.16.0.28",
-        "OPENSDN_GDBSERVER_PORT" : "2024"
+        "OPENSDN_TARGET_HOSTS"     : "172.16.0.28 172.16.0.29 172.16.0.27",
+        "OPENSDN_GDBSERVER_HOST"   : "172.16.0.28",
+        "OPENSDN_GDBSERVER_PORT"   : "2024"
     },
     // ActionButtons settings for OpenSDN
     "actionButtons": {
@@ -30,16 +30,22 @@
    	 "commands": [
 		{
 			"cwd": "${cwd}", // Terminal initial folder ${workspaceFolder} and os user home as defaults
-   			"name": "$(tools) Build OpenSDN binary",
+   			"name": "$(tools) Build OpenSDN service",
 			"color": "yellow",
 			"command": "./opensdn_sync_and_build.sh",
 		},
+        {
+            "cwd": "${cwd}",
+            "name": "$(repo-sync) Restart service",
+            "color": "white",
+            "command": "./restart_service.sh"
+        },
    		{
    			"cwd": "${cwd}", 	// Terminal initial folder ${workspaceFolder} and os user home as defaults
    			"name": "$(triangle-right) Run GDB-Server",
    			"color": "red",
    			"singleInstance": true,
-   			"command":"./Run_GDB_server.sh", // This is executed in the terminal.
+   			"command":"./run_gdb_server.sh", // This is executed in the terminal.
  		}
    	 ]
 	}
