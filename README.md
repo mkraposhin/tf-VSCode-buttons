@@ -7,3 +7,4 @@ It includes:
 - sample bash scripts to compile OpenSDN binaries and to manipulate them.
 
 Currently it is assumed that there is only one OpenSDN development project per one user (because actually we have only one tf-dev-sandbox container per one Linux computer).
+Therefore, all settings in Visual Studio Code are user-global (are contained in settings.json file).
