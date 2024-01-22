@@ -11,6 +11,8 @@ It includes:
 Currently it is assumed that:
 
 1. there is only one OpenSDN development project per one user (because actually we have only one tf-dev-sandbox container per one Linux computer);
-2. therefore, all settings in Visual Studio Code are user-global (are contained in settings.json file).
-3. Visual Studio Code has been started in the OpenSDN development project directory (where folders contrail/, output/, tf-dev-env/ reside).
+2. therefore, all settings in Visual Studio Code are user-global (are contained in settings.json file);
+3. Visual Studio Code has been started in the OpenSDN development project directory (where folders contrail/, output/, tf-dev-env/ reside);
+4. scripts (opensdn_sync_build.sh, run_gdb_server.sh, etc) reside in the OpenSDN development project director.
+
 
