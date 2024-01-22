@@ -1,37 +1,46 @@
 {
-    "remote.WSL.debug": true,
-    "workbench.startupEditor": "none",
-    "security.allowedUNCHosts": [
-        "wsl.localhost"
-    ],
-    
-    "remote.SSH.path": "C:\\Users\\ezizganova\\bin\\ssh.bat",
-    "settingsSync.ignoredSettings": [
-        
-    ],
+    "workbench.colorTheme": "Default Dark+",
+    "remote.SSH.path": "C:\\Users\\kraposhin\\bin\\ssh.bat",
     "remote.SSH.remotePlatform": {
-        "172.16.0.47": "linux"
+        "172.16.0.29": "linux",
+        "172.16.0.4": "linux"
     },
-    "dev.containers.executeInWSL": true,
+    "remote.SSH.useLocalServer": false,
+    "remote.SSH.showLoginTerminal": true,
+    "git.ignoreLegacyWarning": true,
+    // OpenSDN build settings
+    "terminal.integrated.env.linux": {
+        "OPENSDN_PROJECT_DIR" : "172.16.0.4-tf-krap-build",
+        "OPENSDN_BUILD_HOST" : "172.16.0.4",
+        "OPENSDN_REMOTE_BUILD_DIR" : "tf-krap-build",
+        "OPENSDN_TARGET_TYPE" : "debug",
+        "OPENSDN_N_BUILD_CPU" : "16",
+        "OPENSDN_TARGET_DIR" : "vnsw/agent/contrail",
+        "OPENSDN_TARGET_BIN" : "contrail-vrouter-agent",
+        "OPENSDN_TARGET_CONTAINER" : "vrouter_vrouter-agent_1",
+        "OPENSDN_TARGET_HOSTS" : "172.16.0.28",
+        "OPENSDN_GDBSERVER_HOST" : "172.16.0.28",
+        "OPENSDN_GDBSERVER_PORT" : "2024"
+    },
+    // ActionButtons settings for OpenSDN
     "actionButtons": {
    	 "defaultColor": "#ff0034", // Can also use string color names.
    	 "loadNpmCommands":false, // Disables automatic generation of actions for npm commands.
    	 "reloadButton":"♻️", // Custom reload button text or icon (default ↻). null value enables automatic reload on configuration change
    	 "commands": [
 		{
-			"cwd": "/home/ezizganova/work/tungsten/contrail", 	// Terminal initial folder ${workspaceFolder} and os user home as defaults
-   			"name": "$(tools) Build VRouterAgent",
-			"color": "green",
-			"command": "./BVA.sh",
+			"cwd": "${cwd}", // Terminal initial folder ${workspaceFolder} and os user home as defaults
+   			"name": "$(tools) Build OpenSDN binary",
+			"color": "yellow",
+			"command": "./opensdn_sync_and_build.sh",
 		},
    		{
-   			"cwd": "/home/ezizganova", 	// Terminal initial folder ${workspaceFolder} and os user home as defaults
+   			"cwd": "${cwd}", 	// Terminal initial folder ${workspaceFolder} and os user home as defaults
    			"name": "$(triangle-right) Run GDB-Server",
    			"color": "red",
    			"singleInstance": true,
    			"command":"./Run_GDB_server.sh", // This is executed in the terminal.
  		}
-   		
    	 ]
 	}
 }
