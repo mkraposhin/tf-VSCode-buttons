@@ -4,7 +4,10 @@ BUILD_SERVER=172.16.0.4
 
 if [ $# -ne 2 ]
 then
-    echo "Wrong number of arguments"
+    echo "Wrong number of arguments. Usage"
+    echo "change_container_ver.sh CUR_VER NEW_VER"
+    echo "- CUR_VER is the name of the branch with the current version of OpenSDN (tf-dev-sandbox)"
+    echo "- NEW_VER is the name of the docker container with the new version of OpenSDN"
     exit 1
 fi
 
