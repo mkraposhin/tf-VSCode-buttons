@@ -13,6 +13,7 @@
         "OPENSDN_PROJECT_DIR"      : "172.16.0.4-tf-krap-build",
         "OPENSDN_BUILD_HOST"       : "172.16.0.4",
         "OPENSDN_REMOTE_BUILD_DIR" : "tf-krap-build",
+        "OPENSDN_CONTAINER_PREF"   : "krap",
         "OPENSDN_TARGET_TYPE"      : "debug",
         "OPENSDN_N_BUILD_CPU"      : "16",
         "OPENSDN_TARGET_DIR"       : "vnsw/agent/contrail",

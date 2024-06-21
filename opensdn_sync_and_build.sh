@@ -19,6 +19,10 @@ function check_input_parameters() {
     then
         return 5
     fi
+    if [ "$OPENSDN_CONTAINER_PREFIX" = "" ]
+    then
+        return 5
+    fi
     return 0
 }
 
@@ -51,11 +55,11 @@ then
     contrail/ root@$OPENSDN_BUILD_HOST:/root/$OPENSDN_REMOTE_BUILD_DIR/contrail/
     rsync -avtu tf-dev-env/ root@$OPENSDN_BUILD_HOST:/root/$OPENSDN_REMOTE_BUILD_DIR/tf-dev-env
     echo "Running build on remote build server $OPENSDN_BUILD_HOST"
-    #ssh root@$BUILD_HOST "docker container exec -e CONTRAIL_COMPILE_WITHOUT_SYMBOLS=yes -w /root/contrail tf-dev-sandbox scons -j$OPENSDN_N_BUILD_CPU --opt=$OPENSDN_TARGET_TYPE $OPENSDN_TARGET_BIN"
-    ssh root@$OPENSDN_BUILD_HOST "docker container exec -w /root/contrail tf-dev-sandbox scons -j$OPENSDN_N_BUILD_CPU --opt=$OPENSDN_TARGET_TYPE $OPENSDN_TARGET_BIN"
+    #ssh root@$BUILD_HOST "docker container exec -e CONTRAIL_COMPILE_WITHOUT_SYMBOLS=yes -w /root/contrail $OPENSDN_CONTAINER_PREFIX-tf-dev-sandbox scons -j$OPENSDN_N_BUILD_CPU --opt=$OPENSDN_TARGET_TYPE $OPENSDN_TARGET_BIN"
+    ssh root@$OPENSDN_BUILD_HOST "docker container exec -w /root/contrail $OPENSDN_CONTAINER_PREFIX-tf-dev-sandbox scons -j$OPENSDN_N_BUILD_CPU --opt=$OPENSDN_TARGET_TYPE $OPENSDN_TARGET_BIN"
 else
     echo "Running build locally"
-    docker container exec -w /root/contrail tf-dev-sandbox scons -j$OPENSDN_N_BUILD_CPU --opt=$OPENSDN_TARGET_TYPE $OPENSDN_TARGET_BIN
+    docker container exec -w /root/contrail $OPENSDN_CONTAINER_PREFIX-tf-dev-sandbox scons -j$OPENSDN_N_BUILD_CPU --opt=$OPENSDN_TARGET_TYPE $OPENSDN_TARGET_BIN
 fi
 
 
@@ -64,14 +68,14 @@ if [ "$OPENSDN_BUILD_HOST" != "" ]
 then
     ssh root@$OPENSDN_BUILD_HOST \
         "docker container cp \
-        tf-dev-sandbox:/root/contrail/build/$OPENSDN_TARGET_TYPE/$OPENSDN_TARGET_DIR/$OPENSDN_TARGET_BIN \
+        $OPENSDN_CONTAINER_PREFIX-tf-dev-sandbox:/root/contrail/build/$OPENSDN_TARGET_TYPE/$OPENSDN_TARGET_DIR/$OPENSDN_TARGET_BIN \
         /root/$OPENSDN_REMOTE_BUILD_DIR/$OPENSDN_TARGET_BIN-$OPENSDN_TARGET_TYPE"
     rsync --progress -a \
         root@$OPENSDN_BUILD_HOST:/root/$OPENSDN_REMOTE_BUILD_DIR/$OPENSDN_TARGET_BIN-$OPENSDN_TARGET_TYPE \
         ./$OPENSDN_TARGET_BIN-$OPENSDN_TARGET_TYPE
 else
         "docker container cp \
-        tf-dev-sandbox:/root/contrail/build/$OPENSDN_TARGET_TYPE/$OPENSDN_TARGET_DIR/$OPENSDN_TARGET_BIN \
+        $OPENSDN_CONTAINER_PREFIX-tf-dev-sandbox:/root/contrail/build/$OPENSDN_TARGET_TYPE/$OPENSDN_TARGET_DIR/$OPENSDN_TARGET_BIN \
         ./$OPENSDN_TARGET_BIN-$OPENSDN_TARGET_TYPE"
 fi
 
