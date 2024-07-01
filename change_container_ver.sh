@@ -12,7 +12,7 @@ then
     exit 1
 fi
 
-PREFIX =$1
+PREFIX=$1
 CUR_VER=$2
 NEW_VER=$3
 
